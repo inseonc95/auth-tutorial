@@ -1,6 +1,8 @@
 import { auth } from "./auth"
 export default auth((req) => {
-  console.log("ROUTE:", req.nextUrl.pathname)
+  const isLoggedIn = !!req.auth;
+  console.log("ROUTE:", req.nextUrl.pathname);
+  console.log("IS LOGGEDIN:", isLoggedIn);
   // req.auth
 })
 
