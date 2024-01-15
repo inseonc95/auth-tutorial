@@ -1,7 +1,7 @@
 import { CheckCircledIcon } from "@radix-ui/react-icons" // lucide icons,, and more
 
 interface FormErrorProps {
-  message: string
+  message?: string
 }
 
 export const FormSuccess = ({ 
