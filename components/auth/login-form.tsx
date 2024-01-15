@@ -3,6 +3,7 @@
 import * as z from "zod";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { CardWrapper } from "@/components/auth/card-wrapper";
@@ -22,8 +23,15 @@ import { FormError } from "@/components/ui/form-error";
 import { FormSuccess } from "@/components/ui/form-success";
 
 import { login } from "@/actions/login";
+import { useTransition } from "react";
 
 const LoginForm = () => {
+
+  const [error, SetError] = useState<string | undefined>("");
+  const [success, SetSuccess] = useState<string | undefined>("");
+
+  const [isPending, startTransition] = useTransition();
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -33,7 +41,19 @@ const LoginForm = () => {
   })
 
   const onSubmit = (values: z.infer<typeof LoginSchema>) => {
-    login(values)
+    // setPending 대신에 useTransition을 사용할 수 있음
+
+    SetError("");
+    SetSuccess("");
+    startTransition(() => {
+      login(values)
+        .then((data) => {
+          SetError(data.error);
+          SetSuccess(data.success);
+        })
+    });
+
+    // axios.post("/your/api/route", values).then...
   }
 
   return ( 
@@ -57,6 +77,7 @@ const LoginForm = () => {
               <FormControl>
                 <Input 
                   {...field}
+                  disabled={isPending}
                   placeholder="jon.doe@exmple.com"
                   type="email"
                 />
@@ -74,6 +95,7 @@ const LoginForm = () => {
               <FormControl>
                 <Input 
                   {...field}
+                  disabled={isPending}
                   placeholder="******"
                   type="password"
                 />
@@ -83,9 +105,10 @@ const LoginForm = () => {
             )}
         />
         </div>
-        <FormError message="" />
-        <FormSuccess message="" />
+        <FormError message={error} />
+        <FormSuccess message={success} />
         <Button 
+        disabled={isPending}
         type="submit" 
         className="w-full" 
         >
