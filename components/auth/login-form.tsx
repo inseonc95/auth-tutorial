@@ -18,7 +18,8 @@ import {
   FormMessage
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
-
+import { FormError } from "@/components/ui/form-error";
+import { FormSuccess } from "@/components/ui/form-success";
 
 const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -80,6 +81,8 @@ const LoginForm = () => {
             )}
         />
         </div>
+        <FormError message="Invalid credentials!" />
+        <FormSuccess message="Email Sent!" />
         <Button 
         type="submit" 
         className="w-full" 
