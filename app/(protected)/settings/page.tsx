@@ -1,7 +1,10 @@
-const SettingPage = () => {
-  return ( 
+import { auth } from "@/auth";
+
+const SettingPage = async () => {
+  const session = await auth()
+;  return ( 
     <div>
-      <h1>Setting Page</h1>
+      {JSON.stringify(session)}
     </div>
    );
 }
