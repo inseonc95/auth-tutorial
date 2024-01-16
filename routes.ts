@@ -6,6 +6,7 @@
 
 export const publicRoutes = [
   "/",
+  "/auth/new-verification"
   // "/settings", <- url: /settings에 접근가능하게 하려면 이렇게 해야함
 ];
 
