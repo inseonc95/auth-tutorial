@@ -1,30 +1,27 @@
 /**
- * An array of routes that are accessible to the public.
- * Thes routes do not require authentication.
+ * An array of routes that are accessible to the public
+ * These routes do not require authentication
  * @type {string[]}
  */
-
 export const publicRoutes = [
   "/",
   "/auth/new-verification"
-  // "/settings", <- url: /settings에 접근가능하게 하려면 이렇게 해야함
 ];
 
 /**
- * An array of routes that are used for authentication.
- * Thes routes will redirect logged in users to / settings
+ * An array of routes that are used for authentication
+ * These routes will redirect logged in users to /settings
  * @type {string[]}
  */
-
 export const authRoutes = [
   "/auth/login",
   "/auth/register",
-  "/auth/error",
-]
+  "/auth/error"
+];
 
 /**
- * The prefix for API authentication routes.
- * Routes that start with this prefix are used for API authentication purposes.
+ * The prefix for API authentication routes
+ * Routes that start with this prefix are used for API authentication purposes
  * @type {string}
  */
 export const apiAuthPrefix = "/api/auth";

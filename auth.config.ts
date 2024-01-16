@@ -20,10 +20,10 @@ export default {
     Credentials({
       async authorize(credentials) {
         const validatedFields = LoginSchema.safeParse(credentials);
+
         if (validatedFields.success) {
           const { email, password } = validatedFields.data;
-
-          //check the password
+          
           const user = await getUserByEmail(email);
           if (!user || !user.password) return null;
 
@@ -34,6 +34,7 @@ export default {
 
           if (passwordsMatch) return user;
         }
+
         return null;
       }
     })
