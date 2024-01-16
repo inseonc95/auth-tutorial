@@ -6,7 +6,7 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes"
-export const { auth } = NextAuth(authConfig)
+const { auth } = NextAuth(authConfig)
 
 export default auth((req) => {
   const { nextUrl } = req;
@@ -22,7 +22,7 @@ export default auth((req) => {
 
   if (isAuthRoute) { // public 보다 이전에 위치해야함 왜냐하면 public이 authRoute에 포함되어 있기 때문에
     if (isLoggedIn) {
-      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
     }
     return null;
   }
