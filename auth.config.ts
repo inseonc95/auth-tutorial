@@ -17,12 +17,12 @@ export default {
           const user = await getUserByEmail(email);
           if (!user || !user.password) return null;
 
-          const passwordMatch = await bcrypt.compare(
+          const passwordsMatch = await bcrypt.compare(
             password, 
             user.password,
           );
-          
-          if (passwordMatch) return user;
+
+          if (passwordsMatch) return user;
         }
         return null;
       }
